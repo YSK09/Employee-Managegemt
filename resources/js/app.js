@@ -4,8 +4,14 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-import './bootstrap';
-import { createApp } from 'vue';
+import './bootstrap'
+import { createApp } from 'vue'
+
+import { createRouter, createWebHistory } from 'vue-router'
+
+import EmployeesIndex from './components/employees/EmployeesIndex.vue';
+import EmployeesCreate from './components/employees/EmployeesCreate.vue';
+import EmployeesEdit from './components/employees/EmployeesEdit.vue';
 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
@@ -13,10 +19,22 @@ import { createApp } from 'vue';
  * to use in your application's views. An example is included for you.
  */
 
-const app = createApp({});
+const router = createRouter( {
+    history: createWebHistory(),
 
-import ExampleComponent from './components/ExampleComponent.vue';
-app.component('example-component', ExampleComponent);
+    routes: [
+        {path: '/employees', name: 'EmployeesIndex', component: EmployeesIndex},
+        {path: '/create', name: 'EmployeesCreate', component: EmployeesCreate},
+        {path: '/edit', name: 'EmployeesEdit', component: EmployeesEdit},
+    ]
+})
+
+
+// import ExampleComponent from './components/ExampleComponent.vue';
+// import EmployeesIndex from './components/employees/EmployeesIndex.vue';
+// import { options } from 'laravel-mix';
+// app.component('employees-index', EmployeesIndex);
+// app.component('example-component', ExampleComponent);
 
 /**
  * The following block of code may be used to automatically register your
@@ -36,4 +54,12 @@ app.component('example-component', ExampleComponent);
  * scaffolding. Otherwise, you will need to add an element yourself.
  */
 
-app.mount('#app');
+
+  // 5. Create and mount the root instance.
+  const app = createApp({})
+  // Make sure to _use_ the router instance to make the
+  // whole app router-aware.
+  app.use(router)
+
+  app.mount('#app')
+

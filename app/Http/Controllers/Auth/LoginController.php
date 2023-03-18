@@ -28,6 +28,10 @@ class LoginController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
+    // Ketika User salah memasukan email atau Pass 3 kali maka akan  menunggu 5 minutes
+    protected $maxAttempts = 3; //Maksimal percobaan
+    protected $decayMinutes = 1; // Waktu Pencobaan
+
     /**
      * Create a new controller instance.
      *
